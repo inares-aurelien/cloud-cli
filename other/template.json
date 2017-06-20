@@ -1,0 +1,29 @@
+[{
+    "title" : "AnsibleMe",
+    "description" : "AnsibleMe",
+    "logo" : "",
+    "image" : "aureliend/ansibleme:latest",
+    "interactive" : true
+  }, {
+    "title" : "Cloud9",
+    "description" : "Cloud9 IDE",
+    "logo" : "https://static.c9.io/nc-3.1.3635-bebd9fb0/static/homepage/images/cloud9_logo.png",
+    "image" : "aureliend/cloud9:latest",
+    "ports" : [
+      "80/tcp",
+      "443/tcp"
+    ]
+  }, {
+    "title" : "Azure-CLI (python)",
+    "description" : "Azure-CLI (python)",
+    "logo" : "",
+    "image" : "aureliend/azure-cli:python",
+    "interactive" : true
+  }, {
+    "title" : "Azure-CLI (nodeJS)",
+    "description" : "Azure-CLI (nodeJS)",
+    "logo" : "",
+    "image" : "aureliend/azure-cli:node",
+    "interactive" : true
+  }
+]
