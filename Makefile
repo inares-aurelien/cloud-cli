@@ -16,13 +16,13 @@ $(CLI_LIST):
 			else \
 				BUILD=`expr $$BUILD + 1` ; \
 			fi ; \
-			message="***** Build $@ $$VERSION b$$BUILD *****" ; \
+			message="***** Build $@ $$VERSION.$$BUILD *****" ; \
 			length=$${#message} ; \
 			stars=$$(head -c "$$length" < /dev/zero | tr '\0' '*') ; \
 			echo -e "\n\n\n$$stars\n$$message\n$$stars\n" ; \
 			echo -e "VERSION=$$VERSION\nBUILD=$$BUILD" > $@/.version && \
-			docker build -t $(NAME)/$@:$$VERSION-$$BUILD --compress -f $@/Dockerfile --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF=`git rev-parse --short HEAD` . && \
-			docker tag $(NAME)/$@:$$VERSION-$$BUILD $(NAME):latest && \
+			docker build -t $(NAME)/$@:$$VERSION.$$BUILD --compress -f $@/Dockerfile --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF=`git rev-parse --short HEAD` . && \
+			docker tag $(NAME)/$@:$$VERSION.$$BUILD $(NAME):latest && \
 			echo -e "\n\n"
 
 
@@ -46,5 +46,5 @@ tidy:
 pushdocker:
 	@echo -e "\n\n***** Push images to docker hub *****\n"
 	@for myTag in $(CLI_LIST) ; do \
-			docker push $$myTag ; \
+			docker push $(NAME)/$$myTag ; \
 	done
