@@ -11,7 +11,7 @@ all: $(CLI_LIST)
 
 $(CLI_LIST):
 	@source $@/.version && \
-			if [ "$$TRAVIS_BRANCH" == "master" ] ; then \
+			if [ $$TRAVIS ] ; then \
 				BUILD=$$TRAVIS_BUILD_NUMBER ; \
 			else \
 				BUILD=`expr $$BUILD + 1` ; \
