@@ -22,7 +22,7 @@ $(CLI_LIST):
 			echo -e "\n\n\n$$stars\n$$message\n$$stars\n" ; \
 			echo -e "VERSION=$$VERSION\nBUILD=$$BUILD" > $@/.version && \
 			docker build -t $(NAME)/$@:$$VERSION.$$BUILD --compress -f $@/Dockerfile --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VCS_REF=`git rev-parse --short HEAD` . && \
-			docker tag $(NAME)/$@:$$VERSION.$$BUILD $(NAME):latest && \
+			docker tag $(NAME)/$@:$$VERSION.$$BUILD $(NAME)/$@:latest && \
 			echo -e "\n\n"
 
 
