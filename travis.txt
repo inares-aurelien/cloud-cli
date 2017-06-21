@@ -1,0 +1,31 @@
+language: ruby
+
+git:
+  depth: 1
+
+env:
+  global:
+    - DOCKER_REPO=aureliend/cloud-ci
+# DOCKER_USERNAME and DOCKER_PASSWORD are set with Travis CLI
+
+
+# https://docs.travis-ci.com/user/customizing-the-build
+#before_install:
+#  - 
+
+install:
+  - docker --version
+
+# before_script:
+
+script:
+  - make -B all
+
+#after_script:
+#  - pkill -f jekyll -9
+#  - sleep 1
+
+after_success:
+ - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+ - make -B pushdocker
+ 
