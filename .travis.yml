@@ -12,28 +12,26 @@ git:
 env:
   global:
     - DOCKER_REPO=aureliend/cloud-ci
-# DOCKER_USERNAME and DOCKER_PASSWORD are set with Travis CLI
+# DOCKER_USERNAME and DOCKER_PASSWORD are set with Travis CLI (see repo settings)
 
 
 # https://docs.travis-ci.com/user/customizing-the-build
 # https://docs.travis-ci.com/user/docker/
-before_install:
-  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-  - sudo apt-get update
-  - sudo apt-get -y install docker-ce
+# With the new Travis trusty image, the docker version is good (17.03.1)
+# before_install:
+  # - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  # - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  # - sudo apt-get update
+  # - sudo apt-get -y install docker-ce
   
 install:
   - docker --version
 
-# before_script:
-
 script:
   - make -B all
 
-#after_script:
-#  - pkill -f jekyll -9
-#  - sleep 1
+after_script:
+  - docker images
 
 after_success:
  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"

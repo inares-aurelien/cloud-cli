@@ -46,5 +46,5 @@ tidy:
 pushdocker:
 	@echo -e "\n\n***** Push images to docker hub *****\n"
 	@for myTag in $(CLI_LIST) ; do \
-			docker push $(NAME)/$$myTag ; \
+			docker push $(NAME)/$$myTag:latest ; \
 	done
